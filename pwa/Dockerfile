@@ -13,6 +13,8 @@ WORKDIR /srv/app
 RUN npm install -g corepack@latest && \
     corepack enable && \
 	corepack prepare --activate pnpm@latest && \
+    SHELL=bash pnpm setup && \
+	. ~/.bashrc && \
 	pnpm config -g set store-dir /.pnpm-store
 
 # Next.js collects completely anonymous telemetry data about general usage.
