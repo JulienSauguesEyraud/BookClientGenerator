@@ -23,6 +23,10 @@ class Author
     #[Assert\NotBlank]
     public int $birthDate;
 
+    #[ORM\OneToMany(targetEntity: Book::class, mappedBy: 'author', cascade: ['persist'])]
+    #[ORM\JoinColumn(name: 'book_id', referencedColumnName: 'id', nullable: false)]
+    public Book $books;
+
     public function getId(): ?int
     {
         return $this->id;

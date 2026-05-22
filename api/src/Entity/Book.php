@@ -19,7 +19,7 @@ class Book
     #[Assert\NotBlank]
     public string $title = '';
 
-    #[ORM\ManyToOne(targetEntity: Author::class, cascade: ['persist'])]
+    #[ORM\ManyToOne(targetEntity: Author::class, cascade: ['persist'], inversedBy: 'books')]
     #[ORM\JoinColumn(name: 'author_id', referencedColumnName: 'id', nullable: false)]
     public Author $author;
 
