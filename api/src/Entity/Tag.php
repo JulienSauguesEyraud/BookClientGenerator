@@ -16,9 +16,9 @@ class Tag
     #[ORM\GeneratedValue]
     private ?int $id = null;
 
-    #[ORM\Column(name: 'name')]
+    #[ORM\Column(name: 'name', enumType: Tags::class)]
     #[Assert\NotBlank]
-    public Tags $name;
+    public Tags $name = Tags::scienceFiction;
 
     public function getId(): ?int
     {

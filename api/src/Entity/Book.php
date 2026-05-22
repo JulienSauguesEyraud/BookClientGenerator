@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -24,11 +26,25 @@ class Book
     public Author $author;
 
     #[ORM\ManyToMany(targetEntity: Tag::class, cascade: ['persist'])]
-    #[ORM\JoinColumn(name: 'author_id', referencedColumnName: 'id', nullable: false)]
-    public Tag $tags;
+    #[ORM\JoinTable(name: 'book_tag')]
+    public Collection $tags;
+
+    public function __construct()
+    {
+        $this->tags = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function setTags(iterable $tags): void
+    {
+        $this->tags = new ArrayCollection();
+
+        foreach ($tags as $tag) {
+            $this->tags->add($tag);
+        }
     }
 }

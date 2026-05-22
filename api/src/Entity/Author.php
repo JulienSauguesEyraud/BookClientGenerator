@@ -2,7 +2,10 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Metadata\ApiProperty;
 use ApiPlatform\Metadata\ApiResource;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -19,13 +22,18 @@ class Author
     #[Assert\NotBlank]
     public string $name = '';
 
-    #[ORM\Column(name: 'birth_date')]
+    #[ORM\Column(name: 'birth_year')]
     #[Assert\NotBlank]
-    public int $birthDate;
+    public int $birthYear = 1950;
 
-    #[ORM\OneToMany(targetEntity: Book::class, mappedBy: 'author', cascade: ['persist'])]
-    #[ORM\JoinColumn(name: 'book_id', referencedColumnName: 'id', nullable: false)]
-    public Book $books;
+    #[ORM\OneToMany(targetEntity: Book::class, mappedBy: 'author')]
+    #[ApiProperty(writable: false)]
+    public ?Collection $books;
+
+    public function __construct()
+    {
+        $this->books = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
