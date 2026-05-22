@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Doctrine\Enum;
+namespace App\Enum;
 
-enum Tags : string
+enum Tags: string
 {
     case scienceFiction = 'science-fiction';
     case comedy = 'comedy';

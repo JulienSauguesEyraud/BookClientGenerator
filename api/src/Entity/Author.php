@@ -1,18 +1,17 @@
 <?php
 
-namespace App\Doctrine\Entity;
+namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
-
 #[ORM\Entity]
+#[ApiResource(mercure: true)]
 class Author
 {
-
     #[ORM\Id]
-    #[ORM\Column(type: 'integer', name: 'id')]
+    #[ORM\Column(name: 'id', type: 'integer')]
     #[ORM\GeneratedValue]
     private ?int $id = null;
 
