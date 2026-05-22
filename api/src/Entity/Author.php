@@ -1,32 +1,28 @@
 <?php
 
-namespace App\Entity;
+namespace App\Doctrine\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
-/**
- * This is a dummy entity. Remove it!
- */
-#[ApiResource(mercure: true)]
+
 #[ORM\Entity]
-class Greeting
+class Author
 {
-    /**
-     * The entity ID
-     */
+
     #[ORM\Id]
-    #[ORM\Column(type: 'integer')]
-    #[ORM\GeneratedValue(strategy: 'SEQUENCE')]
+    #[ORM\Column(type: 'integer', name: 'id')]
+    #[ORM\GeneratedValue]
     private ?int $id = null;
 
-    /**
-     * A nice person
-     */
-    #[ORM\Column]
+    #[ORM\Column(name: 'name')]
     #[Assert\NotBlank]
     public string $name = '';
+
+    #[ORM\Column(name: 'birth_date')]
+    #[Assert\NotBlank]
+    public int $birthDate;
 
     public function getId(): ?int
     {
